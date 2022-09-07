@@ -1,0 +1,11 @@
+{
+  "name": "my-scriptkit",
+  "type": "module",
+  "dependencies": {
+    "@johnlindquist/kit": "file:../.kit",
+    "image-downloader": "^4.3.0",
+    "octokit": "^2.0.7",
+    "puppeteer": "^17.1.2",
+    "query-string": "^7.1.1"
+  }
+}
