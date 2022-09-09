@@ -1,6 +1,8 @@
 import "@johnlindquist/kit";
 
 // Name: My GitHub Repositories
+// Shortcut: CMD 2
+
 const pat = await env("GITHUB_TOKEN");
 let { Octokit } = await npm("octokit");
 
@@ -15,7 +17,7 @@ const {
 } = await octokit.rest.users.getAuthenticated();
 
 // Get all repos since 2020
-const response = await octokit.request(
+const { data: repositories } = await octokit.request(
   "GET /user/repos?affiliation={affiliation}&per_page={perPage}&since={since}&sort={sort}",
   {
     affiliation: "owner",
@@ -25,19 +27,35 @@ const response = await octokit.request(
   }
 );
 
-// inspect(response.data);
-
 // Create a selectable list, and open the selected repo in the browser
 let url = await arg(
   "Your repositories:",
-  response.data.map(({ name, description, html_url }) => {
+  repositories.map(({ name, description, html_url }) => {
     return {
       name,
       description: html_url,
       value: html_url,
-      preview: () => {
-        //TODO make preview async and request the readme
-        return md(`# ${name}\n${description || ""}`);
+      preview: async () => {
+        try {
+          const { data: readmeInfo } = await octokit.request(
+            "GET /repos/{owner}/{repo}/readme",
+            {
+              owner,
+              repo: name,
+            }
+          );
+
+          try {
+            const { data: readmeContent } = await octokit.request(
+              `GET ${readmeInfo["download_url"]}`
+            );
+            return md(readmeContent);
+          } catch {
+            return md(`Downloading the README for repo '${repoName}' failed`);
+          }
+        } catch {
+          return md("No information available");
+        }
       },
     };
   })
