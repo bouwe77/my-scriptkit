@@ -16,11 +16,12 @@ const {
 
 // Get all repos since 2020
 const response = await octokit.request(
-  "GET /user/repos?affiliation={affiliation}&per_page={perPage}&since={since}",
+  "GET /user/repos?affiliation={affiliation}&per_page={perPage}&since={since}&sort={sort}",
   {
     affiliation: "owner",
     perPage: 100,
     since: "2020-01-01T00:00:00Z",
+    sort: "updated",
   }
 );
 
