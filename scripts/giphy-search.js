@@ -1,9 +1,8 @@
 import "@johnlindquist/kit";
 
 // Menu: Giphy
-// Description: Search giphy. Paste link.
-// Author: John Lindquist
-// Twitter: @johnlindquist
+// Description: Search giphy
+// Shortcut: CMD 1
 
 let download = await npm("image-downloader");
 let queryString = await npm("query-string");
@@ -14,14 +13,17 @@ let GIPHY_API_KEY = await env("GIPHY_API_KEY", async () => {
 });
 
 let search = (q) =>
-  `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${q}&limit=10&offset=0&rating=g&lang=en`;
+  `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${q}&limit=20&offset=0&rating=g&lang=en`;
 
-let { input, url } = await arg("Search giphy:", async (input) => {
+// hier dus niet een arg gebruiken, maar HTML maken: https://youtu.be/zu_g17ePajA?t=4008
+const stuff = await arg("Search giphy:", async (input) => {
   if (!input) return [];
   let query = search(input);
   let { data } = await get(query);
 
-  return data.data.map((gif) => {
+  await inspect(data);
+
+  const floep = data.data.map((gif) => {
     return {
       name: gif.title.trim() || gif.slug,
       value: {
@@ -31,21 +33,12 @@ let { input, url } = await arg("Search giphy:", async (input) => {
       preview: `<img src="${gif.images.downsized.url}" alt="">`,
     };
   });
+
+  // await inspect(floep);
+
+  // dev(1, floep.length);
+
+  return floep;
 });
 
-let formattedLink = await arg("Format to paste", [
-  {
-    name: "URL Only",
-    value: url,
-  },
-  {
-    name: "Markdown Image Link",
-    value: `![${input}](${url})`,
-  },
-  {
-    name: "HTML <img>",
-    value: `<img src="${url}" alt="${input}">`,
-  },
-]);
-
-setSelectedText(formattedLink);
+// await inspect(stuff);
