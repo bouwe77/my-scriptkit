@@ -15,14 +15,12 @@ let search = (q) =>
   `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${q}&limit=20&offset=0&rating=g&lang=en`;
 
 // hier dus niet een arg gebruiken, maar HTML maken: https://youtu.be/zu_g17ePajA?t=4008
-const stuff = await arg("Search giphy:", async (input) => {
+const gif = await arg("Search giphy:", async (input) => {
   if (!input) return [];
   let query = search(input);
   let { data } = await get(query);
 
-  await inspect(data);
-
-  const floep = data.data.map((gif) => {
+  const gifs = data.data.map((gif) => {
     return {
       name: gif.title.trim() || gif.slug,
       value: {
@@ -33,11 +31,8 @@ const stuff = await arg("Search giphy:", async (input) => {
     };
   });
 
-  // await inspect(floep);
-
-  // dev(1, floep.length);
-
-  return floep;
+  return gifs;
 });
 
-// await inspect(stuff);
+copy(gif.url);
+await setSelectedText(gif.url);
