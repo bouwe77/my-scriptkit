@@ -2,10 +2,10 @@ import "@johnlindquist/kit";
 
 // Name: Join Google Meet
 // Description: Joins the Google Meet URL by opening it in the browser and clicking "Join"
+// Shortcut: CMD 1
 
 // IMPORTANT: This script uses AppleScript to interact with the Google Meet page,
-// so be sure to enable AppleScript in Chrome:
-// View -> Developer -> Allow JavaScript from Apple Events
+// so be sure to enable AppleScript in Chrome: View -> Developer -> Allow JavaScript from Apple Events
 
 const meetUrl = await env("MEET_URL", async () => {
   const urlToSave = await arg("Enter URL to Google Meet");
