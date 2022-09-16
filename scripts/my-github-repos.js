@@ -1,7 +1,7 @@
 import "@johnlindquist/kit";
 
 // Name: My GitHub Repositories
-// Shortcut: CMD 2
+// Shortcut: CMD 3
 
 const pat = await env("GITHUB_TOKEN");
 let { Octokit } = await npm("octokit");

@@ -2,7 +2,7 @@ import "@johnlindquist/kit";
 
 // Name: Join Google Meet
 // Description: Joins the Google Meet URL by opening it in the browser and clicking "Join"
-// Shortcut: CMD 1
+// Shortcut: CMD 2
 
 // IMPORTANT: This script uses AppleScript to interact with the Google Meet page,
 // so be sure to enable AppleScript in Chrome: View -> Developer -> Allow JavaScript from Apple Events
