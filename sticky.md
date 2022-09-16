@@ -3,7 +3,7 @@
 ## Ideas for ScriptKit:
 
 - [x] Join daily standup
-- [ ] Can I automate clicking the Join button?
+- [x] Can I automate clicking the Join button?
 - [x] Kit tab is gone, so update to latest daily build
 - [ ] Add caption to Giphy through API?
 - [ ] Create "notes" app (combi of to do and scratch pad scripts)
@@ -20,6 +20,8 @@
 - [ ] Clean up my ScriptKit repo, because not everything needs to be in there
 - [ ] Cache my GitHub repos for speed, so the repos, readme URLs, and/or the whole readme even maybe
 - [ ]
+
+
 
 
 
