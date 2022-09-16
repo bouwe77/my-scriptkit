@@ -2,6 +2,7 @@ import "@johnlindquist/kit";
 
 // Menu: Giphy
 // Description: Search giphy
+// Shortcut: CMD 1
 
 let download = await npm("image-downloader");
 let queryString = await npm("query-string");
@@ -34,5 +35,8 @@ const gif = await arg("Search giphy:", async (input) => {
   return gifs;
 });
 
-copy(gif.url);
-await setSelectedText(gif.url);
+const caption = await arg("caption").then((caption) =>
+  caption ? `#caption "${caption} "` : ""
+);
+
+await setSelectedText(`/giphy ${caption}${gif.url}`);
