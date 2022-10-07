@@ -1,4 +1,5 @@
 // Name: dev projects
+// Shortcut: CMD 3
 
 import "@johnlindquist/kit";
 
