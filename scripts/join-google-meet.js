@@ -2,7 +2,7 @@ import "@johnlindquist/kit";
 
 // Name: Join Google Meet
 // Description: Joins the Google Meet URL by opening it in the browser and clicking "Join"
-// Shortcut: CMD 2
+// Shortcut: CMD 1
 
 // IMPORTANT: This script uses AppleScript to interact with the Google Meet page,
 // so be sure to enable AppleScript in Chrome: View -> Developer -> Allow JavaScript from Apple Events
@@ -17,9 +17,12 @@ await browse(meetUrl);
 // wait ~2 seconds for page to load before sending the click
 await wait(2000);
 
-// To click the "Join" button in the DOM, we search by a pretty obscure, but constant name:
-const buttonName = "Qx7uuf";
-const js = `document.querySelector('[jsname=\\"${buttonName}\\"]').click();`;
+// Find a span with the text "Join now" and click its parent button
+const js = `Array.prototype.filter.call(
+  document.querySelectorAll('button span'),
+  (el) => (el.textContent.trim() === 'Join now')
+)[0].parentElement.click()
+`
 
 // Execute the JS to click the button on the active tab with AppleScript
 await applescript(`
