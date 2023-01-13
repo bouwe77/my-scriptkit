@@ -2,7 +2,7 @@ import "@johnlindquist/kit";
 
 // Menu: Giphy
 // Description: Search giphy
-// Shortcut: CMD 1
+// Shortcut: CMD 2
 
 let download = await npm("image-downloader");
 let queryString = await npm("query-string");
