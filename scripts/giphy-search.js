@@ -15,7 +15,6 @@ let GIPHY_API_KEY = await env("GIPHY_API_KEY", async () => {
 let search = (q) =>
   `https://api.giphy.com/v1/gifs/search?api_key=${GIPHY_API_KEY}&q=${q}&limit=20&offset=0&rating=g&lang=en`;
 
-// hier dus niet een arg gebruiken, maar HTML maken: https://youtu.be/zu_g17ePajA?t=4008
 const gif = await arg("Search giphy:", async (input) => {
   if (!input) return [];
   let query = search(input);
