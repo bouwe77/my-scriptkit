@@ -35,7 +35,7 @@ const gif = await arg("Search giphy:", async (input) => {
 });
 
 const caption = await arg("caption").then((caption) =>
-  caption ? `#caption "${caption} "` : ""
+  `#caption "${caption || ' '}" `
 );
 
 await setSelectedText(`/giphy ${caption}${gif.url}`);
